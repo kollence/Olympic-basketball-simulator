@@ -1,13 +1,16 @@
 import { useState } from "react";
 import { useTournamentData } from "../state/useTournamentData";
+import GroupStage from "./GroupStage";
+import DrawStage from "./DrawStage";
+import EliminationPhase from "./EliminationPhase";
 
 export default function BasketballTournament() {
   const { groups, loading } = useTournamentData();
   const [currentStep, setCurrentStep] = useState(0);
   const steps = [
-    { component: <div>GroupStage</div> },
-    { component: <div>DrawStage</div> },
-    { component: <div>EliminationPhase</div> },
+    { component: GroupStage },
+    { component: DrawStage },
+    { component: EliminationPhase },
   ];
   const handleNextStep = () => {
     if (currentStep < steps.length - 1) {
@@ -19,6 +22,7 @@ export default function BasketballTournament() {
       setCurrentStep(currentStep - 1);
     }
   };
+  const CurrentComponent = steps[currentStep].component;
   
   return (
     <div >
@@ -45,7 +49,7 @@ export default function BasketballTournament() {
           key={index}
           className={`step ${index === currentStep ? "active" : "inactive"}`}
         >
-          {step.component && step.component}
+          {step.component && <CurrentComponent />}
         </div>
       ))}
     </div>
