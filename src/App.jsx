@@ -1,12 +1,16 @@
 import './App.css'
 import BasketballTournament from './components/BasketballTournament'
+import GlobalProvider  from './context/GlobalContext'
 
 function App() {
 
   return (
     <>
       <div>
-        <BasketballTournament />
+        <GlobalProvider >
+
+          <BasketballTournament />
+        </GlobalProvider>
       </div>
     </>
   )
